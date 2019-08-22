@@ -1,0 +1,58 @@
+use Company;
+
+select * from employees;
+
+select Fname,Lname,Salary,Dno from employees;
+
+select Pname,Plocation,Dname from project join departments on project.Dnum=departments.Dnum;
+
+select concat (Fname,' ',Lname) as Full_name ,
+Salary,Salary*10/100 as ANNUAL_COMM from employees;
+
+select SSN, Fname,Lname from employees
+where Salary > 1000;
+select SSN, concat(Fname,' ',Lname) as Full_Name from employees
+where Salary > 1000;
+
+select SSN, concat(Fname,Lname) as Full_Name from employees
+where Salary*12 > 10000;
+
+select Fname,Lname,Salary from employees
+where sex='f';
+
+select Dnum ,Dnum from departments
+where MGRSSN=968574;
+
+select Pnumber,Plocation,Pname from project
+where Dnum=10;
+
+select  departments.Dname,departments.Dnum,employees.Superssn from departments
+left join employees on departments.MGRSSN=employees.Superssn;
+
+select  Dname , Pname from departments
+inner join project on departments.Dnum=project.Dnum;
+
+select concat(Fname,' ',Lname) as Full_Name,
+ESSN, dependent.Sex,dependent.Bdate,Dependent_name from employees 
+inner join dependent on dependent.ESSN=employees.SSN;
+
+select dependent.Dependent_name,dependent.Sex from dependent 
+join employees on dependent.Sex='f' and employees.sex='f' 
+union
+select dependent.Dependent_name,dependent.Sex from dependent 
+join employees on dependent.Sex='m' and employees.sex='m';
+
+select * from employees 
+inner join departments on employees.Superssn=departments.MGRSSN;
+
+select Pnumber,Pname,Plocation from project where City = 'Cairo' or City='Alex';
+
+select * from project where Pname like 'a%';
+
+select concat(Fname,' ',Lname) as Full_Name,Dno,Salary from employees 
+where Dno=30 and Salary between 1000 and 2000;
+
+select distinct concat(Fname,' ',Lname) as Full_Name,Dno,Hours from employees 
+ inner join works_for on employees.Dno =10 and works_for.Hours >=10 
+ inner join project on project.Pname='Al Rabwah';
+
