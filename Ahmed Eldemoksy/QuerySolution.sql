@@ -1,3 +1,4 @@
+use company;
 -- Query Solution for lab-02.doc
 -- 1. Display all the employees Data.
 select * from employees;
@@ -102,5 +103,16 @@ select max(Salary) as MaxSalary, min(Salary) as Minimumsalary, avg(Salary) as Av
 from employees 
 group by Dno;
 -- 24.List the last name of all managers who have no dependents.
+select Lname 
+from employees 
+where SSN not in (select MGRSSN from departments);
+/* 25. For each department-- if its average salary is less than the average salary of all departments
+-- display its number, name and number of its employees.*/
+select Dno, avg(Salary) as average
+from employees 
+group by Dno
+having  average < some (select avg(Salary) as average from employees group by Dno)
+ORDER BY average ASC limit 1;
+/* 26.Retrieve a list of employees and the projects they are working on ordered by department
+ and within each department, ordered alphabetically by last name, first name.*/
 
- 
